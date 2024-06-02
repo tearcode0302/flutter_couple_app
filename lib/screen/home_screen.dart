@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,12 +9,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DateTime firstDay = DateTime.now();
+  DateTime firstDay = DateTime.now(); // 처음 만난 날
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[100],
+      backgroundColor: Colors.blue[100],
       body: SafeArea(
         top: true,
         bottom: true,
@@ -33,7 +34,28 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onHeartPressed() {
-    print('클릭');
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            color: Colors.white,
+            height: 300,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              onDateTimeChanged: (DateTime date) {
+                setState(() {
+                  
+                });
+                firstDay = date;
+              },
+            ),
+          ),
+        );
+      },
+      barrierDismissible: true,
+    );
   }
 }
 
